@@ -10,7 +10,7 @@ const path = require("path")
 ////////////////////////////////////////////////////////////////////////////////
 
 const app = express()
-const port = 8080
+const port = process.env.PORT || 8080
 
 ////////////////////////////////////////////////////////////////////////////////
 // RUN
@@ -19,6 +19,7 @@ const port = 8080
 app.use(express.static(path.join(__dirname, "public")))
 
 app.set("view engine", "pug")
+app.set("trust proxy", true)
 
 app.get("/", (req, res) =>
 {
