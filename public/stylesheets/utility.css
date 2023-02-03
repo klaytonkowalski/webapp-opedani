@@ -1,0 +1,73 @@
+.hidden
+{
+    display: none;
+}
+
+.solid
+{
+    background-color: #202020;
+}
+
+.soft
+{
+    color: #a3a3a3;
+}
+
+.primary
+{
+    color: #64a4ca;
+}
+
+.padding-small
+{
+    padding: 10px;
+}
+
+.padding-medium
+{
+    padding: 20px;
+}
+
+.gap-small
+{
+    gap: 10px;
+}
+
+.gap-medium
+{
+    gap: 20px;
+}
+
+.push-right
+{
+    margin-left: auto;
+}
+
+.vertical
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal
+{
+    display: flex;
+}
+
+.center
+{
+    text-align: center;
+}
+
+.align
+{
+    align-items: center;
+}
+
+@media screen and (max-width: 639px)
+{
+    [data-breakpoint=greater-than-small]
+    {
+        display: none;
+    }
+}

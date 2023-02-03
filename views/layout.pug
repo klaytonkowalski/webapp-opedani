@@ -7,11 +7,27 @@ html(lang="en")
         meta(name="keywords" content="anime, opening, openings, op, ops, ending, endings, ed, eds, rate, rating, rank, ranking")
         meta(name="viewport" content="width=device-width, initial-scale=1")
         meta(name="charset" content="utf-8")
-        link(href="/stylesheets/elements.css" rel="stylesheet")
-        link(href="/stylesheets/layout.css" rel="stylesheet")
+        link(href="/images/icon.png" rel="icon")
+        link(href="/stylesheets/element.css" rel="stylesheet")
+        link(href="/stylesheets/component.css" rel="stylesheet")
         block block-head
     body
-        block block-body
+        nav.topnav
+            a(href="/").primary.horizontal.align OpEdAni
+            button(type="button").button-complex.push-right
+                i(data-feather="menu")
+                p(data-breakpoint="greater-than-small") Menu
+            button(type="button").button-complex
+                i(data-feather="log-in")
+                p(data-breakpoint="greater-than-small") Log In
+            button(type="button").button-complex
+                i(data-feather="user-plus")
+                p(data-breakpoint="greater-than-small") Sign Up
+        main
+            block block-main
+        footer.solid.padding-medium.vertical.center
+            p.soft Copyright &copy #{new Date().getFullYear()} OpEdAni Team
+        link(href="/stylesheets/utility.css" rel="stylesheet")
         script(src="/scripts/jquery-3.6.3.min.js")
         script(src="/scripts/feather.min.js")
         script feather.replace()

@@ -1,0 +1,16 @@
+.topnav
+{
+    background-color: #202020;
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+}
+
+.button-complex
+{
+    align-items: center;
+    display: flex;
+    gap: 10px;
+}
