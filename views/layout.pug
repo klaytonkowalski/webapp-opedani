@@ -12,24 +12,49 @@ html(lang="en")
         link(href="/stylesheets/component.css" rel="stylesheet")
         block block-head
     body
-        nav.topnav
-            a(href="/").primary.horizontal.align OpEdAni
-            button(type="button").button-complex.push-right
-                i(data-feather="menu")
-                p(data-breakpoint="greater-than-small") Menu
-            button(type="button").button-complex
-                i(data-feather="log-in")
-                p(data-breakpoint="greater-than-small") Log In
-            button(type="button").button-complex
-                i(data-feather="user-plus")
-                p(data-breakpoint="greater-than-small") Sign Up
+        nav.nav-top
+            a(href="/").color-primary.horizontal.align OpEdAni
+            div(data-focus="false").relative.push-right
+                button(type="button").button-complex
+                    i(data-feather="menu")
+                    p(data-breakpoint="greater-than-small") Menu
+                div(data-focus-target)
+            div(data-focus="false" data-auth="false").relative
+                button(type="button" data-auth="false").button-complex
+                    i(data-feather="log-in")
+                    p(data-breakpoint="greater-than-small") Log In
+                form#layoutLogInForm(data-focus-target).input-box
+                    label(for="layoutLogInEmail") Email
+                    input#layoutLogInEmail(type="email" required)
+                    label(for="layoutLogInPassword") Password
+                    input#layoutLogInPassword(type="password" required)
+                    button(type="submit") Log In
+            div(data-focus="false" data-auth="false").relative
+                button(type="button" data-auth="false").button-complex
+                    i(data-feather="user-plus")
+                    p(data-breakpoint="greater-than-small") Sign Up
+                form#layoutSignUpForm(data-focus-target).input-box
+                    label(for="layoutSignUpEmail") Email
+                    input#layoutSignUpEmail(type="email" required)
+                    label(for="layoutSignUpPassword") Password
+                    input#layoutSignUpPassword(type="password" required)
+                    label(for="layoutSignUpRetype") Retype Password
+                    input#layoutSignUpRetype(type="password" required)
+                    button(type="submit") Sign Up
+            div(data-auth="true").relative
+                button#layoutLogOutButton(type="button" data-auth="true").button-complex
+                    i(data-feather="log-out")
+                    p(data-breakpoint="greater-than-small") Log Out
         main
             block block-main
-        footer.solid.padding-medium.vertical.center
-            p.soft Copyright &copy #{new Date().getFullYear()} OpEdAni Team
+        footer.background-dark.padding-medium.vertical.center
+            p.color-soft Copyright &copy #{new Date().getFullYear()} OpEdAni Team
+        div#layoutStatusBox.status-box.hidden
         link(href="/stylesheets/utility.css" rel="stylesheet")
         script(src="/scripts/jquery-3.6.3.min.js")
         script(src="/scripts/feather.min.js")
         script feather.replace()
-        script(src="/scripts/layout.js")
+        script(src="/scripts/status.js" type="module")
+        script(src="/scripts/firebase.js" type="module")
+        script(src="/scripts/layout.js" type="module")
         block block-script

@@ -3,17 +3,22 @@
     display: none;
 }
 
-.solid
+.background-dark
 {
     background-color: #202020;
 }
 
-.soft
+.background-primary
+{
+    background-color: #397fa8;
+}
+
+.color-soft
 {
     color: #a3a3a3;
 }
 
-.primary
+.color-primary
 {
     color: #64a4ca;
 }
@@ -43,15 +48,15 @@
     margin-left: auto;
 }
 
+.horizontal
+{
+    display: flex;
+}
+
 .vertical
 {
     display: flex;
     flex-direction: column;
-}
-
-.horizontal
-{
-    display: flex;
 }
 
 .center
@@ -64,10 +69,25 @@
     align-items: center;
 }
 
+.relative
+{
+    position: relative;
+}
+
 @media screen and (max-width: 639px)
 {
     [data-breakpoint=greater-than-small]
     {
         display: none;
     }
+}
+
+[data-auth="true"], [data-auth="false"]
+{
+    display: none;
+}
+
+[data-focus="false"] > [data-focus-target]
+{
+    display: none;
 }
