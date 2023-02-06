@@ -64,9 +64,14 @@
     text-align: center;
 }
 
-.align
+.align-x-axis
 {
     align-items: center;
+}
+
+.align-y-axis
+{
+    justify-content: center;
 }
 
 .relative

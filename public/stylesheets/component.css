@@ -1,11 +1,20 @@
 .nav-top
 {
+    align-items: center;
     background-color: #202020;
     display: flex;
     gap: 20px;
     padding: 10px;
     position: sticky;
     top: 0;
+}
+
+.nav-top-search
+{
+    margin-left: auto;
+    max-width: 320px;
+    position: relative;
+    width: 100%;
 }
 
 .button-complex

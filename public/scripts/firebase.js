@@ -2,9 +2,10 @@
 // DEPENDENCIES
 ////////////////////////////////////////////////////////////////////////////////
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"
-import { showStatus } from "/scripts/status.js"
+import $ from "jquery"
+import { initializeApp } from "firebase/app"
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth"
+import { showStatus } from "./status"
 
 ////////////////////////////////////////////////////////////////////////////////
 // VARIABLES

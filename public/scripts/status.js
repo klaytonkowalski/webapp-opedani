@@ -1,3 +1,5 @@
+import $ from "jquery"
+
 const layoutStatusBox = $("#layoutStatusBox")
 
 let showHandle

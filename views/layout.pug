@@ -10,10 +10,14 @@ html(lang="en")
         link(href="/images/icon.png" rel="icon")
         link(href="/stylesheets/element.css" rel="stylesheet")
         link(href="/stylesheets/component.css" rel="stylesheet")
-        block block-head
     body
         nav.nav-top
-            a(href="/").color-primary.horizontal.align OpEdAni
+            a(href="/").color-primary.horizontal.align-x-axis OpEdAni
+            div.nav-top-search
+                form#layoutSearchForm.horizontal.align-x-axis.gap-small
+                    label(for="layoutSearchQuery")
+                        i(data-feather="search")
+                    input#layoutSearchQuery(type="search" minlength="2" required)
             div(data-focus="false").relative.push-right
                 button(type="button").button-complex
                     i(data-feather="menu")
@@ -48,13 +52,7 @@ html(lang="en")
         main
             block block-main
         footer.background-dark.padding-medium.vertical.center
-            p.color-soft Copyright &copy #{new Date().getFullYear()} OpEdAni Team
+            p.color-soft Copyright &copy #{new Date().getFullYear()} Klayton Kowalski
         div#layoutStatusBox.status-box.hidden
         link(href="/stylesheets/utility.css" rel="stylesheet")
-        script(src="/scripts/jquery-3.6.3.min.js")
-        script(src="/scripts/feather.min.js")
-        script feather.replace()
-        script(src="/scripts/status.js" type="module")
-        script(src="/scripts/firebase.js" type="module")
-        script(src="/scripts/layout.js" type="module")
-        block block-script
+        script(src="/scripts/bundle.js" type="module")
