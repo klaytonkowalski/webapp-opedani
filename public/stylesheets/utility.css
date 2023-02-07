@@ -79,6 +79,16 @@
     position: relative;
 }
 
+.nowrap
+{
+    min-width: max-content;
+}
+
+.space-evenly
+{
+    justify-content: space-evenly;
+}
+
 @media screen and (max-width: 639px)
 {
     [data-breakpoint=greater-than-small]

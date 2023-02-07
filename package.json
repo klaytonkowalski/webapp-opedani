@@ -3,8 +3,8 @@
     "private": "true",
     "scripts": {
         "start": "node main.js",
-        "build": "webpack --progress --mode=development",
-        "watch": "webpack --progress --watch",
+        "build": "webpack",
+        "watch": "webpack watch",
         "gcp-build": "npm run build"
     },
     "dependencies": {

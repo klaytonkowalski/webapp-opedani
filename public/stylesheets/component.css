@@ -4,7 +4,7 @@
     background-color: #202020;
     display: flex;
     gap: 20px;
-    padding: 10px;
+    padding: 10px 20px;
     position: sticky;
     top: 0;
 }
@@ -12,21 +12,38 @@
 .nav-top-search
 {
     margin-left: auto;
-    max-width: 320px;
+    max-width: 400px;
     position: relative;
     width: 100%;
 }
 
-.button-complex
+.icon-text
 {
     align-items: center;
     display: flex;
     gap: 10px;
 }
 
+.search-box
+{
+    background-color: #202020;
+    box-shadow: 0 0 5px #101010;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+}
+
+.search-box > *:not(:last-child)
+{
+    border-bottom: 1px solid #101010;
+}
+
 .input-box
 {
     background-color: #202020;
+    box-shadow: 0 0 5px #101010;
     display: flex;
     flex-direction: column;
     gap: 10px;
