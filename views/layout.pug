@@ -12,52 +12,51 @@ html(lang="en")
         link(href="/stylesheets/component.css" rel="stylesheet")
     body
         nav.nav-top
-            a(href="/").color-primary.horizontal.align-x-axis OpEdAni
+            a(href="/").icon-text
+                img(src="/images/icon.png" width="24px" height="24px")
+                p(data-breakpoint="greater-than-medium").color-primary OpEdAni
             div(data-focus="false").nav-top-search
                 form#layoutSearchForm.horizontal.align-x-axis.gap-small
                     label(for="layoutSearchQuery")
                         i(data-feather="search")
-                    input#layoutSearchQuery(type="search" placeholder="Shiki" minlength="2" required)
-                    select#layoutSearchCategory
-                        option(value="anime" selected) Anime
-                        option(value="song") Song
-                        option(value="user") User
+                    input#layoutSearchQuery(type="search" minlength="2" autocomplete="off" spellcheck="false" required)
                 div(data-focus-target)#layoutSearchBox.search-box
-            div(data-focus="false").relative.push-right
-                button(type="button").icon-text
-                    i(data-feather="menu")
-                    p(data-breakpoint="greater-than-small") Menu
-                div(data-focus-target)
             div(data-focus="false" data-auth="false").relative
                 button(type="button" data-auth="false").icon-text.nowrap
                     i(data-feather="log-in")
-                    p(data-breakpoint="greater-than-small") Log In
+                    p(data-breakpoint="greater-than-medium") Log In
                 form#layoutLogInForm(data-focus-target).input-box
                     label(for="layoutLogInEmail") Email
-                    input#layoutLogInEmail(type="email" required)
+                    input#layoutLogInEmail(type="email" autocomplete="off" spellcheck="false" required)
                     label(for="layoutLogInPassword") Password
-                    input#layoutLogInPassword(type="password" required)
+                    input#layoutLogInPassword(type="password" autocomplete="off" spellcheck="false" required)
                     button(type="submit") Log In
             div(data-focus="false" data-auth="false").relative
                 button(type="button" data-auth="false").icon-text.nowrap
                     i(data-feather="user-plus")
-                    p(data-breakpoint="greater-than-small") Sign Up
+                    p(data-breakpoint="greater-than-medium") Sign Up
                 form#layoutSignUpForm(data-focus-target).input-box
                     label(for="layoutSignUpEmail") Email
-                    input#layoutSignUpEmail(type="email" required)
+                    input#layoutSignUpEmail(type="email" autocomplete="off" spellcheck="false" required)
                     label(for="layoutSignUpPassword") Password
-                    input#layoutSignUpPassword(type="password" required)
+                    input#layoutSignUpPassword(type="password" autocomplete="off" spellcheck="false" required)
                     label(for="layoutSignUpRetype") Retype Password
-                    input#layoutSignUpRetype(type="password" required)
+                    input#layoutSignUpRetype(type="password" autocomplete="off" spellcheck="false" required)
                     button(type="submit") Sign Up
             div(data-auth="true").relative
                 button#layoutLogOutButton(type="button" data-auth="true").icon-text.nowrap
                     i(data-feather="log-out")
-                    p(data-breakpoint="greater-than-small") Log Out
+                    p(data-breakpoint="greater-than-medium") Log Out
+            div(data-focus="false").relative
+                button(type="button").icon-text
+                    i(data-feather="menu")
+                    p(data-breakpoint="greater-than-medium") Menu
+                div(data-focus-target).input-box
+
         main
             block block-main
         footer.background-dark.padding-medium.vertical.center
-            p.color-soft Copyright &copy #{new Date().getFullYear()} Klayton Kowalski
+            p Copyright &copy #{new Date().getFullYear()} Klayton Kowalski
         div#layoutStatusBox.status-box.hidden
         link(href="/stylesheets/utility.css" rel="stylesheet")
         script(src="/scripts/bundle.js" type="module")

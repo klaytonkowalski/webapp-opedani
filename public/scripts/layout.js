@@ -4,7 +4,7 @@
 
 import $ from "jquery"
 import feather from "feather-icons"
-import { createAccount, logIn, logOut, queryCategory } from "./firebase"
+import { createAccount, logIn, logOut, generalQuery } from "./firebase"
 
 ////////////////////////////////////////////////////////////////////////////////
 // ELEMENTS
@@ -22,7 +22,6 @@ const layoutSignUpRetype = $("#layoutSignUpRetype")
 const layoutLogOutButton = $("#layoutLogOutButton")
 
 const layoutSearchQuery = $("#layoutSearchQuery")
-const layoutSearchCategory = $("#layoutSearchCategory")
 const layoutSearchBox = $("#layoutSearchBox")
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,16 +77,15 @@ function layoutSearchQuery_onInput()
         clearTimeout(layoutSearchHandle)
         layoutSearchHandle = undefined
     }
-    layoutSearchBox.children().remove()
     const text = layoutSearchQuery.val()
-    const category = layoutSearchCategory.val()
     if (text.length >= 2)
     {
         layoutSearchHandle = setTimeout(async () =>
         {
             clearTimeout(layoutSearchHandle)
             layoutSearchHandle = undefined
-            const results = await queryCategory(text, category)
+            const results = await generalQuery(text)
+            layoutSearchBox.children().remove()
             let elementTree = ""
             for (const result of results)
             {
@@ -99,7 +97,7 @@ function layoutSearchQuery_onInput()
                         </div>
                         <div class="icon-text">
                             <i data-feather="music"></i>
-                            <a href="${result.songId}">${result.songDisplayTitle}</a>
+                            <a href="/song/${result.songId}">${result.songDisplayTitle}</a>
                         </div>
                         <div class="icon-text">
                             <i data-feather="list"></i>
@@ -128,25 +126,6 @@ function layoutSearchQuery_onInput()
     }
 }
 
-function layoutSearchCategory_onChange()
-{
-    layoutSearchQuery.val("")
-    layoutSearchBox.children().remove()
-    const category = layoutSearchCategory.val()
-    if (category == "anime")
-    {
-        layoutSearchQuery.attr("placeholder", "Shiki")
-    }
-    else if (category == "song")
-    {
-        layoutSearchQuery.attr("placeholder", "Venus Line")
-    }
-    else if (category == "user")
-    {
-        layoutSearchQuery.attr("placeholder", "Tortellini Soup")
-    }
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // RUN
 ////////////////////////////////////////////////////////////////////////////////
@@ -158,6 +137,5 @@ layoutSignUpForm.on("submit", layoutSignUpForm_onSubmit)
 layoutLogInForm.on("submit", layoutLogInForm_onSubmit)
 layoutLogOutButton.on("click", layoutLogOutButton_onClick)
 layoutSearchQuery.on("input", layoutSearchQuery_onInput)
-layoutSearchCategory.on("change", layoutSearchCategory_onChange)
 
 feather.replace()
