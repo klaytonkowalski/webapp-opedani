@@ -17,6 +17,16 @@
     width: 100%;
 }
 
+.icon-image
+{
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    display: flex;
+    height: 24px;
+    width: 24px;
+}
+
 .icon-text
 {
     align-items: center;
@@ -53,7 +63,7 @@
     position: absolute;
     right: 0;
     top: 100%;
-    width: 320px;
+    width: max-content;
 }
 
 .status-box

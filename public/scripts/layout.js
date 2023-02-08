@@ -19,7 +19,7 @@ const layoutSignUpEmail = $("#layoutSignUpEmail")
 const layoutSignUpPassword = $("#layoutSignUpPassword")
 const layoutSignUpRetype = $("#layoutSignUpRetype")
 
-const layoutLogOutButton = $("#layoutLogOutButton")
+const layoutLogOut = $("#layoutLogOut")
 
 const layoutSearchQuery = $("#layoutSearchQuery")
 const layoutSearchBox = $("#layoutSearchBox")
@@ -65,7 +65,7 @@ function layoutSignUpForm_onSubmit(event)
     return false
 }
 
-function layoutLogOutButton_onClick()
+function layoutLogOut_onClick()
 {
     logOut()
 }
@@ -135,7 +135,7 @@ $(document).on('click', document_onClick)
 
 layoutSignUpForm.on("submit", layoutSignUpForm_onSubmit)
 layoutLogInForm.on("submit", layoutLogInForm_onSubmit)
-layoutLogOutButton.on("click", layoutLogOutButton_onClick)
+layoutLogOut.on("click", layoutLogOut_onClick)
 layoutSearchQuery.on("input", layoutSearchQuery_onInput)
 
 feather.replace()

@@ -43,16 +43,20 @@ html(lang="en")
                     label(for="layoutSignUpRetype") Retype Password
                     input#layoutSignUpRetype(type="password" autocomplete="off" spellcheck="false" required)
                     button(type="submit") Sign Up
-            div(data-auth="true").relative
-                button#layoutLogOutButton(type="button" data-auth="true").icon-text.nowrap
-                    i(data-feather="log-out")
-                    p(data-breakpoint="greater-than-medium") Log Out
+            div(data-focus="false" data-auth="true").relative
+                button#layoutUser(type="button").icon-image.background-shadow
+                div(data-focus-target).input-box
+                    a#layoutProfile(href="/").icon-text.color-normal
+                        i(data-feather="user")
+                        p Profile
+                    button#layoutLogOut(type="button").icon-text
+                        i(data-feather="log-out")
+                        p Log Out
             div(data-focus="false").relative
                 button(type="button").icon-text
                     i(data-feather="menu")
                     p(data-breakpoint="greater-than-medium") Menu
                 div(data-focus-target).input-box
-
         main
             block block-main
         footer.background-dark.padding-medium.vertical.center

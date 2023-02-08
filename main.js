@@ -26,6 +26,11 @@ app.get("/", (req, res) =>
     res.render("index")
 })
 
+app.get(/^\/user\/([0-9A-Za-z]+)$/, (req, res) =>
+{
+    res.render("user")
+})
+
 app.listen(port, () =>
 {
     console.log("Started server. { url = http://localhost:8080 }")

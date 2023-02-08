@@ -8,9 +8,19 @@
     background-color: #202020;
 }
 
+.background-shadow
+{
+    background-color: #101010;
+}
+
 .color-primary
 {
     color: #64a4ca;
+}
+
+.color-normal
+{
+    color: inherit;
 }
 
 .padding-small

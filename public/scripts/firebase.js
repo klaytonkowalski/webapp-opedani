@@ -4,10 +4,17 @@
 
 import $ from "jquery"
 import { initializeApp } from "firebase/app"
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "firebase/auth"
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { getFirestore, collection, getDocs, getDoc, query, where, orderBy, limit } from "firebase/firestore"
-import { getStorage } from "firebase/storage"
+import { getStorage, getDownloadURL, ref } from "firebase/storage"
 import { showStatus } from "./status"
+
+////////////////////////////////////////////////////////////////////////////////
+// ELEMENTS
+////////////////////////////////////////////////////////////////////////////////
+
+const layoutUser = $("#layoutUser")
+const layoutProfile = $("#layoutProfile")
 
 ////////////////////////////////////////////////////////////////////////////////
 // VARIABLES
@@ -32,25 +39,6 @@ const firebaseStorage = getStorage(firebaseApp)
 ////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
-
-function checkSessionAuth()
-{
-    const dataAuth = sessionStorage.getItem("data-auth")
-    if (!dataAuth)
-    {
-        sessionStorage.setItem("data-auth", "false")
-    }
-    if (dataAuth == "true")
-    {
-        $("[data-auth='true']").removeAttr("data-auth")
-        $("[data-auth='false']").remove()
-    }
-    else
-    {
-        $("[data-auth='false']").removeAttr("data-auth")
-        $("[data-auth='true']").remove()
-    }
-}
 
 export function createAccount(email, password)
 {
@@ -94,10 +82,46 @@ export function logOut()
     })
 }
 
+function initPageContent()
+{
+    const dataAuth = sessionStorage.getItem("data-auth") || "false"
+    if (dataAuth == "true")
+    {
+        $("[data-auth='true']").removeAttr("data-auth")
+        $("[data-auth='false']").remove()
+    }
+    else if (dataAuth == "false")
+    {
+        $("[data-auth='false']").removeAttr("data-auth")
+        $("[data-auth='true']").remove()
+    }
+    const photoURL = sessionStorage.getItem("photoURL") || ""
+    if (photoURL != "")
+    {
+        layoutUser.css("background-image", `url(${photoURL})`)
+    }
+    const uid = sessionStorage.getItem("uid") || ""
+    if (uid != "")
+    {
+        layoutProfile.attr("href", `/user/${uid}`)
+    }
+}
+
 function firebaseAuth_onAuthStateChanged(user)
 {
-    sessionStorage.setItem("data-auth", user ? "true" : "false")
-    checkSessionAuth()
+    if (user)
+    {
+        sessionStorage.setItem("data-auth", "true")
+        sessionStorage.setItem("photoURL", user.photoURL)
+        sessionStorage.setItem("uid", user.uid)
+    }
+    else
+    {
+        sessionStorage.setItem("data-auth", "false")
+        sessionStorage.setItem("photoURL", "")
+        sessionStorage.setItem("uid", "")
+    }
+    initPageContent()
 }
 
 function extractGeneralQueryResult(animeDocument, animeData, songDocument, songData)
@@ -150,4 +174,4 @@ export async function generalQuery(text)
 ////////////////////////////////////////////////////////////////////////////////
 
 onAuthStateChanged(firebaseAuth, firebaseAuth_onAuthStateChanged)
-checkSessionAuth()
+initPageContent()
