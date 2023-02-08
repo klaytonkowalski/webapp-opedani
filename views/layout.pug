@@ -1,7 +1,7 @@
 doctype html
 html(lang="en")
     head
-        title OpEdAni: Anime Openings & Endings
+        block title
         meta(name="author" content="Klayton Kowalski")
         meta(name="description" content="OpEdAni is a place to rate and discuss anime openings and endings.")
         meta(name="keywords" content="anime, opening, openings, op, ops, ending, endings, ed, eds, rate, rating, rank, ranking")
@@ -57,6 +57,9 @@ html(lang="en")
                     i(data-feather="menu")
                     p(data-breakpoint="greater-than-medium") Menu
                 div(data-focus-target).input-box
+                    a(href="/contribute")#layoutContribute(type="button").icon-text.color-normal
+                        i(data-feather="upload-cloud")
+                        p Contribute
         main
             block block-main
         footer.background-dark.padding-medium.vertical.center

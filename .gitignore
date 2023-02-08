@@ -1,2 +1,3 @@
 node_modules
 public/scripts/bundle.js
+firebase-service-account-key.json

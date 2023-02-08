@@ -1,5 +1,5 @@
 .gcloudignore
 .git
 .gitignore
-node_modules/
+node_modules
 public/scripts/bundle.js
