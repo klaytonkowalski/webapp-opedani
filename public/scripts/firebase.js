@@ -124,48 +124,79 @@ function firebaseAuth_onAuthStateChanged(user)
     initPageContent()
 }
 
-function extractGeneralQueryResult(animeDocument, animeData, songDocument, songData)
-{
-    const result =
-    {
-        animeId: animeDocument.id,
-        animeDisplayTitle: animeData.displayTitle,
-        songId: songDocument.id,
-        songDisplayTitle: songData.displayTitle,
-        globalRanking: songData.globalRanking,
-        globalRating: songData.globalRating,
-        opening: songData.opening,
-        ordinal: songData.ordinal,
-        popularity: songData.popularity
-    }
-    return result
-}
-
-export async function generalQuery(text)
+export async function querySong(text)
 {
     text = text.toLowerCase()
     const results = []
-    const animeRequest = query(collection(firebaseFirestore, "anime"), where("displaySearchTitle", ">=", text), where("displaySearchTitle", "<=", text + "\u08ff"), orderBy("displaySearchTitle"), limit(5))
-    const songRequest = query(collection(firebaseFirestore, "song"), where("displaySearchTitle", ">=", text), where("displaySearchTitle", "<=", text + "\u08ff"), orderBy("displaySearchTitle"), limit(5))
-    const animeResponse = await getDocs(animeRequest)
-    const songResponse = await getDocs(songRequest)
-    for (const animeDocument of animeResponse.docs)
+    const request = query(collection(firebaseFirestore, "song"), where("displaySearchTitle", ">=", text), where("displaySearchTitle", "<=", text + "\u08ff"), orderBy("displaySearchTitle"), limit(5))
+    const response = await getDocs(request)
+    for (const document of response.docs)
     {
-        const animeData = animeDocument.data()
-        for (const songId of animeData.songIds)
+        const data = document.data()
+        const result =
         {
-            const songDocument = await getDoc(songId)
-            const songData = songDocument.data()
-            results.push(extractGeneralQueryResult(animeDocument, animeData, songDocument, songData))
+            alternateTitle: data.alternateTitle,
+            animeId: data.animeId.id,
+            artistId: data.artistId.id,
+            displayTitle: data.displayTitle,
+            globalRanking: data.globalRanking,
+            globalRating: data.globalRating,
+            id: document.id,
+            opening: data.opening,
+            ordinal: data.ordinal,
+            popularity: data.popularity
         }
+        results.push(result)
     }
-    for (const songDocument of songResponse.docs)
+    return results
+}
+
+export async function queryAnime(text)
+{
+    text = text.toLowerCase()
+    const results = []
+    const request = query(collection(firebaseFirestore, "anime"), where("displaySearchTitle", ">=", text), where("displaySearchTitle", "<=", text + "\u08ff"), orderBy("displaySearchTitle"), limit(5))
+    const response = await getDocs(request)
+    for (const document of response.docs)
     {
-        const songData = songDocument.data()
-        const animeDocument = await getDoc(songData.animeId)
-        const animeData = animeDocument.data()
-        results.push(extractGeneralQueryResult(animeDocument, animeData, songDocument, songData))
+        const data = document.data()
+        const result =
+        {
+            alternateTitle: data.alternateTitle,
+            displayTitle: data.displayTitle,
+            id: document.id,
+            songIds: data.songIds
+        }
+        results.push(result)
     }
+    return results
+}
+
+export async function queryArtist(text)
+{
+    text = text.toLowerCase()
+    const results = []
+    const request = query(collection(firebaseFirestore, "artist"), where("displaySearchTitle", ">=", text), where("displaySearchTitle", "<=", text + "\u08ff"), orderBy("displaySearchTitle"), limit(5))
+    const response = await getDocs(request)
+    for (const document of response.docs)
+    {
+        const data = document.data()
+        const result =
+        {
+            alternateTitle: data.alternateTitle,
+            displayTitle: data.displayTitle,
+            id: document.id,
+            songIds: data.songIds
+        }
+        results.push(result)
+    }
+    return results
+}
+
+export async function queryDocument(text)
+{
+    text = text.toLowerCase()
+    const results = []
     return results
 }
 

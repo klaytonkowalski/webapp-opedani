@@ -4,7 +4,8 @@
 
 import $ from "jquery"
 import feather from "feather-icons"
-import { createAccount, logIn, logOut, generalQuery } from "./firebase"
+import { createAccount, logIn, logOut, queryDocument } from "./firebase"
+import { showStatus } from "./status"
 
 ////////////////////////////////////////////////////////////////////////////////
 // ELEMENTS
@@ -47,6 +48,14 @@ function document_onClick(event)
     })
 }
 
+function dataHelp_onClick(event)
+{
+    const text = $(event.currentTarget).attr("data-help")
+    const duration = parseInt($(event.currentTarget).attr("data-duration"))
+    const elementTree = `<p>${text}</p>`
+    showStatus(elementTree, duration)
+}
+
 function layoutLogInForm_onSubmit(event)
 {
     event.preventDefault()
@@ -82,11 +91,9 @@ function layoutSearchQuery_onInput()
     {
         layoutSearchHandle = setTimeout(async () =>
         {
-            clearTimeout(layoutSearchHandle)
             layoutSearchHandle = undefined
-            const results = await generalQuery(text)
-            layoutSearchBox.children().remove()
             let elementTree = ""
+            const results = await queryDocument(text)
             for (const result of results)
             {
                 elementTree += `
@@ -119,6 +126,7 @@ function layoutSearchQuery_onInput()
                         </div>
                     </div>`
             }
+            layoutSearchBox.children().remove()
             layoutSearchBox.append(elementTree)
             feather.replace()
         },
@@ -131,11 +139,13 @@ function layoutSearchQuery_onInput()
 ////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(document_ready)
-$(document).on('click', document_onClick)
+$(document).on("click", document_onClick)
+
+feather.replace()
+
+$("[data-help]").on("click", dataHelp_onClick)
 
 layoutSignUpForm.on("submit", layoutSignUpForm_onSubmit)
 layoutLogInForm.on("submit", layoutLogInForm_onSubmit)
 layoutLogOut.on("click", layoutLogOut_onClick)
 layoutSearchQuery.on("input", layoutSearchQuery_onInput)
-
-feather.replace()

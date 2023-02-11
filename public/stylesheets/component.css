@@ -7,6 +7,7 @@
     padding: 10px 20px;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 .nav-top-search
@@ -52,7 +53,7 @@
     border-bottom: 1px solid #101010;
 }
 
-.input-box
+.dropdown-box
 {
     background-color: #202020;
     box-shadow: 0 0 5px #101010;
@@ -69,11 +70,32 @@
 .status-box
 {
     background-color: #397fa8;
+    color: #dfdfdf;
     bottom: 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 20px;
-    position: absolute;
+    position: fixed;
+    text-align: center;
     width: 100%;
+}
+
+.spacer-small
+{
+    width: 10px;
+    height: 10px;
+}
+
+.spacer-medium
+{
+    width: 20px;
+    height: 20px;
+}
+
+[data-help]
+{
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
 }

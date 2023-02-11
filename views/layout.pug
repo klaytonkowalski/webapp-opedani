@@ -16,8 +16,8 @@ html(lang="en")
                 img(src="/images/icon.png" width="24px" height="24px")
                 p(data-breakpoint="greater-than-medium").color-primary OpEdAni
             div(data-focus="false").nav-top-search
-                form#layoutSearchForm.horizontal.align-x-axis.gap-small
-                    label(for="layoutSearchQuery")
+                form#layoutSearchForm.horizontal.gap-small
+                    label(for="layoutSearchQuery").horizontal.align-x-axis
                         i(data-feather="search")
                     input#layoutSearchQuery(type="search" minlength="2" autocomplete="off" spellcheck="false" required)
                 div(data-focus-target)#layoutSearchBox.search-box
@@ -25,7 +25,7 @@ html(lang="en")
                 button(type="button" data-auth="false").icon-text.nowrap
                     i(data-feather="log-in")
                     p(data-breakpoint="greater-than-medium") Log In
-                form#layoutLogInForm(data-focus-target).input-box
+                form#layoutLogInForm(data-focus-target).dropdown-box
                     label(for="layoutLogInEmail") Email
                     input#layoutLogInEmail(type="email" autocomplete="off" spellcheck="false" required)
                     label(for="layoutLogInPassword") Password
@@ -35,7 +35,7 @@ html(lang="en")
                 button(type="button" data-auth="false").icon-text.nowrap
                     i(data-feather="user-plus")
                     p(data-breakpoint="greater-than-medium") Sign Up
-                form#layoutSignUpForm(data-focus-target).input-box
+                form#layoutSignUpForm(data-focus-target).dropdown-box
                     label(for="layoutSignUpEmail") Email
                     input#layoutSignUpEmail(type="email" autocomplete="off" spellcheck="false" required)
                     label(for="layoutSignUpPassword") Password
@@ -44,8 +44,8 @@ html(lang="en")
                     input#layoutSignUpRetype(type="password" autocomplete="off" spellcheck="false" required)
                     button(type="submit") Sign Up
             div(data-focus="false" data-auth="true").relative
-                button#layoutUser(type="button").icon-image.background-shadow
-                div(data-focus-target).input-box
+                button#layoutUser(type="button").icon-image.shadow
+                div(data-focus-target).dropdown-box
                     a#layoutProfile(href="/").icon-text.color-normal
                         i(data-feather="user")
                         p Profile
@@ -56,14 +56,14 @@ html(lang="en")
                 button(type="button").icon-text
                     i(data-feather="menu")
                     p(data-breakpoint="greater-than-medium") Menu
-                div(data-focus-target).input-box
-                    a(href="/contribute")#layoutContribute(type="button").icon-text.color-normal
+                div(data-focus-target).dropdown-box
+                    a(href="/contribute")#layoutContribute.icon-text.color-normal
                         i(data-feather="upload-cloud")
                         p Contribute
         main
             block block-main
-        footer.background-dark.padding-medium.vertical.center
-            p Copyright &copy #{new Date().getFullYear()} Klayton Kowalski
+        footer.background-dark.padding-medium.vertical
+            p.center Copyright &copy #{new Date().getFullYear()} OpEdAni Team
         div#layoutStatusBox.status-box.hidden
         link(href="/stylesheets/utility.css" rel="stylesheet")
         script(src="/scripts/bundle.js" type="module")
