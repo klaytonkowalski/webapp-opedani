@@ -112,91 +112,52 @@ function firebaseAuth_onAuthStateChanged(user)
     if (user)
     {
         sessionStorage.setItem("data-auth", "true")
+        sessionStorage.setItem("displayName", user.displayName)
+        sessionStorage.setItem("email", user.email)
+        sessionStorage.setItem("emailVerified", user.emailVerified)
         sessionStorage.setItem("photoURL", user.photoURL)
         sessionStorage.setItem("uid", user.uid)
     }
     else
     {
         sessionStorage.setItem("data-auth", "false")
+        sessionStorage.setItem("displayName", user.displayName)
+        sessionStorage.setItem("email", user.email)
+        sessionStorage.setItem("emailVerified", user.emailVerified)
         sessionStorage.setItem("photoURL", "")
         sessionStorage.setItem("uid", "")
     }
     initPageContent()
 }
 
-export async function querySong(text)
+export async function querySongDocument(key, value)
 {
-    text = text.toLowerCase()
+    value = value.toLowerCase()
     const results = []
-    const request = query(collection(firebaseFirestore, "song"), where("displaySearchTitle", ">=", text), where("displaySearchTitle", "<=", text + "\u08ff"), orderBy("displaySearchTitle"), limit(5))
+    const request = query(
+        collection(firebaseFirestore, "song"),
+        where(key, ">=", value),
+        where(key, "<=", value + "\u08ff"),
+        orderBy(key),
+        limit(5)
+    )
     const response = await getDocs(request)
     for (const document of response.docs)
     {
         const data = document.data()
         const result =
         {
-            alternateTitle: data.alternateTitle,
-            animeId: data.animeId.id,
-            artistId: data.artistId.id,
-            displayTitle: data.displayTitle,
-            globalRanking: data.globalRanking,
-            globalRating: data.globalRating,
-            id: document.id,
+            animeTitle: data.animeTitle,
+            artistName: data.artistName,
             opening: data.opening,
             ordinal: data.ordinal,
-            popularity: data.popularity
+            popularity: data.popularity,
+            ranking: data.ranking,
+            rating: data.rating,
+            title: data.title
         }
         results.push(result)
     }
-    return results
-}
-
-export async function queryAnime(text)
-{
-    text = text.toLowerCase()
-    const results = []
-    const request = query(collection(firebaseFirestore, "anime"), where("displaySearchTitle", ">=", text), where("displaySearchTitle", "<=", text + "\u08ff"), orderBy("displaySearchTitle"), limit(5))
-    const response = await getDocs(request)
-    for (const document of response.docs)
-    {
-        const data = document.data()
-        const result =
-        {
-            alternateTitle: data.alternateTitle,
-            displayTitle: data.displayTitle,
-            id: document.id,
-            songIds: data.songIds
-        }
-        results.push(result)
-    }
-    return results
-}
-
-export async function queryArtist(text)
-{
-    text = text.toLowerCase()
-    const results = []
-    const request = query(collection(firebaseFirestore, "artist"), where("displaySearchTitle", ">=", text), where("displaySearchTitle", "<=", text + "\u08ff"), orderBy("displaySearchTitle"), limit(5))
-    const response = await getDocs(request)
-    for (const document of response.docs)
-    {
-        const data = document.data()
-        const result =
-        {
-            alternateTitle: data.alternateTitle,
-            displayTitle: data.displayTitle,
-            id: document.id,
-            songIds: data.songIds
-        }
-        results.push(result)
-    }
-    return results
-}
-
-export async function queryDocument(text)
-{
-    text = text.toLowerCase()
-    const results = []
     return results
 }
 

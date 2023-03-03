@@ -19,7 +19,7 @@ html(lang="en")
                 form#layoutSearchForm.horizontal.gap-small
                     label(for="layoutSearchQuery").horizontal.align-x-axis
                         i(data-feather="search")
-                    input#layoutSearchQuery(type="search" minlength="2" autocomplete="off" spellcheck="false" required)
+                    input#layoutSearchQuery(type="text" minlength="2" autocomplete="off" spellcheck="false" required)
                 div(data-focus-target)#layoutSearchBox.search-box
             div(data-focus="false" data-auth="false").relative
                 button(type="button" data-auth="false").icon-text.nowrap
@@ -44,10 +44,10 @@ html(lang="en")
                     input#layoutSignUpRetype(type="password" autocomplete="off" spellcheck="false" required)
                     button(type="submit") Sign Up
             div(data-focus="false" data-auth="true").relative
-                button#layoutUser(type="button").icon-image.shadow
+                button#layoutProfile(type="button").icon-image.shadow
                 div(data-focus-target).dropdown-box
                     a#layoutProfile(href="/").icon-text.color-normal
-                        i(data-feather="user")
+                        i(data-feather="profile")
                         p Profile
                     button#layoutLogOut(type="button").icon-text
                         i(data-feather="log-out")

@@ -19,25 +19,21 @@ block block-main
             div#contributeSearch(data-focus="false").horizontal.gap-small.relative.hidden
                 label(for="contributeQuery").horizontal.align-x-axis
                     i(data-feather="search")
-                input#contributeQuery(type="search" minlength="2" autocomplete="off" spellcheck="false")
+                input#contributeQuery(type="text" minlength="2" autocomplete="off" spellcheck="false")
                 div(data-focus-target)#contributeSearchBox.search-box
             form#contributeAddSong.background-dark.shadow.vertical.padding-medium.gap-small
                 div.icon-text
-                    label(for="contributeAddSongDisplayTitle") Display Title
+                    label(for="contributeAddSongTitle") Title
                     i(data-feather="help-circle" data-help="This is how the song is referred to across OpEdAni." data-duration="5000")
-                input#contributeAddSongDisplayTitle(type="text" autocomplete="off" spellcheck="false" required)
-                div.icon-text
-                    label(for="contributeAddSongAlternateTitle") Alternate Title #[span.color-subtle (Optional)]
-                    i(data-feather="help-circle" data-help="This is a term that is strongly associated with the song. It is recognized by the OpEdAni search engine, but is not displayed anywhere." data-duration="10000")
-                input#contributeAddSongAlternateTitle(type="text" autocomplete="off" spellcheck="false")
+                input#contributeAddSongTitle(type="text" autocomplete="off" spellcheck="false" required)
                 div.icon-text
                     label(for="contributeAddSongAnimeTitle") Anime Title
                     i(data-feather="help-circle" data-help="This is the title of the anime associated with the song. If the anime does not yet exist in the OpEdAni database, it will be created." data-duration="10000")
                 input#contributeAddSongAnimeTitle(type="text" autocomplete="off" spellcheck="false" required)
                 div.icon-text
-                    label(for="contributeAddSongArtistTitle") Artist Title
+                    label(for="contributeAddSongArtistName") Artist Name
                     i(data-feather="help-circle" data-help="This is the title of the artist associated with the song. If the artist does not yet exist in the OpEdAni database, it will be created." data-duration="10000")
-                input#contributeAddSongArtistTitle(type="text" autocomplete="off" spellcheck="false" required)
+                input#contributeAddSongArtistName(type="text" autocomplete="off" spellcheck="false" required)
                 div.icon-text
                     label(for="contributeAddSongOrdinal") Ordinal
                     i(data-feather="help-circle" data-help="This is the chronological sequence of the song relative to other openings or endings in the anime." data-duration="5000")
@@ -50,21 +46,17 @@ block block-main
                 button(type="submit") Submit
             form#contributeEditSong.background-dark.shadow.vertical.padding-medium.gap-small.hidden
                 div.icon-text
-                    label(for="contributeEditSongDisplayTitle") Display Title
+                    label(for="contributeEditSongTitle") Title
                     i(data-feather="help-circle" data-help="This is how the song is referred to across OpEdAni." data-duration="5000")
-                input#contributeEditSongDisplayTitle(type="text" autocomplete="off" spellcheck="false" required)
-                div.icon-text
-                    label(for="contributeEditSongAlternateTitle") Alternate Title #[span.color-subtle (Optional)]
-                    i(data-feather="help-circle" data-help="This is a term that is strongly associated with the song. It is recognized by the OpEdAni search engine, but is not displayed anywhere." data-duration="10000")
-                input#contributeEditSongAlternateTitle(type="text" autocomplete="off" spellcheck="false")
+                input#contributeEditSongTitle(type="text" autocomplete="off" spellcheck="false" required)
                 div.icon-text
                     label(for="contributeEditSongAnimeTitle") Anime Title
                     i(data-feather="help-circle" data-help="This is the title of the anime associated with the song. If the anime does not yet exist in the OpEdAni database, it will be created." data-duration="10000")
                 input#contributeEditSongAnimeTitle(type="text" autocomplete="off" spellcheck="false" required)
                 div.icon-text
-                    label(for="contributeEditSongArtistTitle") Artist Title
+                    label(for="contributeEditSongArtistName") Artist Name
                     i(data-feather="help-circle" data-help="This is the title of the artist associated with the song. If the artist does not yet exist in the OpEdAni database, it will be created." data-duration="10000")
-                input#contributeEditSongArtistTitle(type="text" autocomplete="off" spellcheck="false" required)
+                input#contributeEditSongArtistName(type="text" autocomplete="off" spellcheck="false" required)
                 div.icon-text
                     label(for="contributeEditSongOrdinal") Ordinal
                     i(data-feather="help-circle" data-help="This is the chronological sequence of the song relative to other openings or endings in the anime." data-duration="5000")
@@ -77,21 +69,13 @@ block block-main
                 button(type="submit") Submit
             form#contributeEditAnime.background-dark.shadow.vertical.padding-medium.gap-small.hidden
                 div.icon-text
-                    label(for="contributeEditAnimeDisplayTitle") Display Title
-                    i(data-feather="help-circle" data-help="This is how the song is referred to across OpEdAni." data-duration="5000")
-                input#contributeEditAnimeDisplayTitle(type="text" autocomplete="off" spellcheck="false" required)
-                div.icon-text
-                    label(for="contributeEditAnimeAlternateTitle") Alternate Title #[span.color-subtle (Optional)]
-                    i(data-feather="help-circle" data-help="This is a term that is strongly associated with the song. It is recognized by the OpEdAni search engine, but is not displayed anywhere." data-duration="10000")
-                input#contributeEditAnimeAlternateTitle(type="text" autocomplete="off" spellcheck="false")
+                    label(for="contributeEditAnimeTitle") Title
+                    i(data-feather="help-circle" data-help="This is how the anime is referred to across OpEdAni." data-duration="5000")
+                input#contributeEditAnimeTitle(type="text" autocomplete="off" spellcheck="false" required)
                 button(type="submit") Submit
             form#contributeEditArtist.background-dark.shadow.vertical.padding-medium.gap-small.hidden
                 div.icon-text
-                    label(for="contributeEditArtistDisplayTitle") Display Title
-                    i(data-feather="help-circle" data-help="This is how the song is referred to across OpEdAni." data-duration="5000")
-                input#contributeEditArtistDisplayTitle(type="text" autocomplete="off" spellcheck="false" required)
-                div.icon-text
-                    label(for="contributeEditArtistAlternateTitle") Alternate Title #[span.color-subtle (Optional)]
-                    i(data-feather="help-circle" data-help="This is a term that is strongly associated with the song. It is recognized by the OpEdAni search engine, but is not displayed anywhere." data-duration="10000")
-                input#contributeEditArtistAlternateTitle(type="text" autocomplete="off" spellcheck="false")
+                    label(for="contributeEditArtistName") Title
+                    i(data-feather="help-circle" data-help="This is how the artist is referred to across OpEdAni." data-duration="5000")
+                input#contributeEditArtistName(type="text" autocomplete="off" spellcheck="false" required)
                 button(type="submit") Submit

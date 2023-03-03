@@ -15,7 +15,7 @@ module.exports =
         "./public/scripts/firebase.js",
         "./public/scripts/layout.js",
         "./public/scripts/status.js",
-        "./public/scripts/user.js",
+        "./public/scripts/profile.js",
         "./public/scripts/contribute.js"
     ],
     output:

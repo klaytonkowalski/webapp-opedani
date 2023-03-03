@@ -1,3 +1,7 @@
+/*******************************************************************************
+/* MISCELLANEOUS
+*******************************************************************************/
+
 *
 {
     box-sizing: border-box;
@@ -9,6 +13,17 @@
 {
     background: #7839ac88;
 }
+
+hr
+{
+    background-color: #515151;
+    border: none;
+    min-height: 1px;
+}
+
+/*******************************************************************************
+/* SECTIONS
+*******************************************************************************/
 
 html
 {
@@ -37,11 +52,51 @@ main
     padding: 20px;
 }
 
-hr
+/*******************************************************************************
+/* TEXT
+*******************************************************************************/
+
+a
 {
-    background-color: #515151;
-    border: none;
-    min-height: 1px;
+    color: #9e66cc;
+    text-decoration: none;
+}
+
+label
+{
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+h1
+{
+    color: #64a4ca;
+    font-size: 32px;
+}
+
+p
+{
+    line-height: 1.5;
+}
+
+/*******************************************************************************
+/* INPUTS
+*******************************************************************************/
+
+input
+{
+    background: none;
+    border: 1px solid #515151;
+    border-radius: 0;
+    color: inherit;
+    font: inherit;
+    padding: 5px;
+    width: 100%;
+}
+
+input[type=radio], input[type=checkbox]
+{
+    width: initial;
 }
 
 button
@@ -67,34 +122,6 @@ button[type=submit]:active
     transform: translateY(3px);
 }
 
-a
-{
-    color: #9e66cc;
-    text-decoration: none;
-}
-
-label
-{
-    cursor: pointer;
-    line-height: 1.5;
-}
-
-input
-{
-    background: none;
-    border: 1px solid #515151;
-    border-radius: 0;
-    color: inherit;
-    font: inherit;
-    padding: 5px;
-    width: 100%;
-}
-
-input[type=radio], input[type=checkbox]
-{
-    width: initial;
-}
-
 select
 {
     background: none;
@@ -104,15 +131,4 @@ select
     font: inherit;
     padding: 5px;
     width: 100%;
-}
-
-h1
-{
-    color: #64a4ca;
-    font-size: 32px;
-}
-
-p
-{
-    line-height: 1.5;
 }

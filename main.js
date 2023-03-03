@@ -32,9 +32,9 @@ function routeIndex(req, res)
     res.render("index")
 }
 
-function routeUser(req, res)
+function routeProfile(req, res)
 {
-    res.render("user")
+    res.render("profile")
 }
 
 function routeContribute(req, res)
@@ -44,22 +44,20 @@ function routeContribute(req, res)
 
 async function apiAddSong(req, res)
 {
-    const displayTitle = req.body.displayTitle
-    const alternateTitle = req.body.alternateTitle
+    const title = req.body.title
     const animeTitle = req.body.animeTitle
-    const artistTitle = req.body.artistTitle
+    const artistName = req.body.artistName
     const ordinal = req.body.ordinal
     const opening = req.body.opening
     const document =
     {
-        displayTitle: displayTitle,
-        alternateTitle: alternateTitle,
+        title: title,
         animeTitle: animeTitle,
-        artistTitle: artistTitle,
+        artistName: artistName,
         ordinal: ordinal,
         opening: opening
     }
-    firebaseFirestore.collection("contribution").add(document)
+    firebaseFirestore.collection("add-song").add(document)
     .then(() =>
     {
         res.status(200).end()
@@ -72,17 +70,64 @@ async function apiAddSong(req, res)
 
 function apiEditSong(req, res)
 {
-
+    const title = req.body.title
+    const animeTitle = req.body.animeTitle
+    const artistName = req.body.artistName
+    const ordinal = req.body.ordinal
+    const opening = req.body.opening
+    const document =
+    {
+        title: title,
+        animeTitle: animeTitle,
+        artistName: artistName,
+        ordinal: ordinal,
+        opening: opening
+    }
+    firebaseFirestore.collection("edit-song").add(document)
+    .then(() =>
+    {
+        res.status(200).end()
+    })
+    .catch(error =>
+    {
+        res.status(400).end()
+    })
 }
 
 function apiEditAnime(req, res)
 {
-
+    const title = req.body.title
+    const document =
+    {
+        title: title
+    }
+    firebaseFirestore.collection("edit-anime").add(document)
+    .then(() =>
+    {
+        res.status(200).end()
+    })
+    .catch(error =>
+    {
+        res.status(400).end()
+    })
 }
 
 function apiEditArtist(req, res)
 {
-
+    const name = req.body.name
+    const document =
+    {
+        name: name
+    }
+    firebaseFirestore.collection("edit-artist").add(document)
+    .then(() =>
+    {
+        res.status(200).end()
+    })
+    .catch(error =>
+    {
+        res.status(400).end()
+    })
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +141,7 @@ app.set("view engine", "pug")
 app.set("trust proxy", true)
 
 app.get("/", routeIndex)
-app.get(/^\/user\/([0-9A-Za-z]+)$/, routeUser)
+app.get(/^\/profile\/([0-9A-Za-z]+)$/, routeProfile)
 app.get("/contribute", routeContribute)
 
 app.post("/api/add-song", apiAddSong)

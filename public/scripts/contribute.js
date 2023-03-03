@@ -4,7 +4,7 @@
 
 import $ from "jquery"
 import { showStatus } from "./status"
-import { querySong, queryAnime, queryArtist } from "./firebase"
+import { querySongDocument } from "./firebase"
 
 ////////////////////////////////////////////////////////////////////////////////
 // ELEMENTS
@@ -16,26 +16,22 @@ const contributeSearch = $("#contributeSearch")
 const contributeSearchBox = $("#contributeSearchBox")
 const contributeQuery = $("#contributeQuery")
 const contributeAddSong = $("#contributeAddSong")
-const contributeAddSongDisplayTitle = $("#contributeAddSongDisplayTitle")
-const contributeAddSongAlternateTitle = $("#contributeAddSongAlternateTitle")
+const contributeAddSongTitle = $("#contributeAddSongTitle")
 const contributeAddSongAnimeTitle = $("#contributeAddSongAnimeTitle")
-const contributeAddSongArtistTitle = $("#contributeAddSongArtistTitle")
+const contributeAddSongArtistName = $("#contributeAddSongArtistName")
 const contributeAddSongOrdinal = $("#contributeAddSongOrdinal")
 const contributeAddSongOpening = $("#contributeAddSongOpening")
 const contributeEditSong = $("#contributeEditSong")
-const contributeEditSongDisplayTitle = $("#contributeEditSongDisplayTitle")
-const contributeEditSongAlternateTitle = $("#contributeEditSongAlternateTitle")
+const contributeEditSongTitle = $("#contributeEditSongTitle")
 const contributeEditSongAnimeTitle = $("#contributeEditSongAnimeTitle")
-const contributeEditSongArtistTitle = $("#contributeEditSongArtistTitle")
+const contributeEditSongArtistName = $("#contributeEditSongArtistName")
 const contributeEditSongOrdinal = $("#contributeEditSongOrdinal")
 const contributeEditSongOpening = $("#contributeEditSongOpening")
 const contributeEditSongEnding = $("#contributeEditSongEnding")
 const contributeEditAnime = $("#contributeEditAnime")
-const contributeEditAnimeDisplayTitle = $("#contributeEditAnimeDisplayTitle")
-const contributeEditAnimeAlternateTitle = $("#contributeEditAnimeAlternateTitle")
+const contributeEditAnimeTitle = $("#contributeEditAnimeTitle")
 const contributeEditArtist = $("#contributeEditArtist")
-const contributeEditArtistDisplayTitle = $("#contributeEditArtistDisplayTitle")
-const contributeEditArtistAlternateTitle = $("#contributeEditArtistAlternateTitle")
+const contributeEditArtistName = $("#contributeEditArtistName")
 
 ////////////////////////////////////////////////////////////////////////////////
 // VARIABLES
@@ -47,6 +43,12 @@ let contributeSearchResults
 ////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
+
+function init()
+{
+    contributeMethod.val("addSong")
+    contributeMethod.trigger("change", contributeMethod_onChange)
+}
 
 function contributeMethod_onChange()
 {
@@ -84,32 +86,38 @@ function contributeQuery_onInput()
         clearTimeout(contributeSearchHandle)
         contributeSearchHandle = undefined
     }
-    const text = contributeQuery.val()
-    if (text.length >= 2)
+    const value = contributeQuery.val()
+    if (value.length >= 2)
     {
         contributeSearchHandle = setTimeout(async () =>
         {
             contributeSearchHandle = undefined
+            contributeSearchBox.children().remove()
             const method = contributeMethod.val()
             if (method == "editSong")
             {
-                contributeSearchResults = await querySong(text)
+                contributeSearchResults = await querySongDocument("titleSearch", value)
+                for (const result of contributeSearchResults)
+                {
+                    contributeSearchBox.append(`<button type="button" class="padding-small" data-title="${result.title}">${result.title}</button>`)
+                }
             }
             else if (method == "editAnime")
             {
-                contributeSearchResults = await queryAnime(text)
+                contributeSearchResults = await querySongDocument("animeTitleSearch", value)
+                for (const result of contributeSearchResults)
+                {
+                    contributeSearchBox.append(`<button type="button" class="padding-small" data-title="${result.title}">${result.animeTitle}</button>`)
+                }
             }
             else if (method == "editArtist")
             {
-                contributeSearchResults = await queryArtist(text)
+                contributeSearchResults = await querySongDocument("artistNameSearch", value)
+                for (const result of contributeSearchResults)
+                {
+                    contributeSearchBox.append(`<button type="button" class="padding-small" data-title="${result.title}">${result.artistName}</button>`)
+                }
             }
-            let elementTree = ""
-            for (const result of contributeSearchResults)
-            {
-                elementTree += `<button type="button" class="padding-small" data-id="${result.id}">${result.displayTitle}</button>`
-            }
-            contributeSearchBox.children().remove()
-            contributeSearchBox.append(elementTree)
         },
         500)
     }
@@ -118,30 +126,31 @@ function contributeQuery_onInput()
 function contributeSearchBox_onClick(event)
 {
     const element = $(event.currentTarget)
-    const resultId = element.attr("data-id")
-    const result = contributeSearchResults.find(result => result.id == resultId)
+    const resultTitle = element.attr("data-title")
+    const result = contributeSearchResults.find(result => result.title == resultTitle)
     const method = contributeMethod.val()
     if (method == "editSong")
     {
         contributeEditSong.toggleClass("hidden", false)
-        contributeEditSongDisplayTitle.val(result.displayTitle)
-        contributeEditSongAlternateTitle.val(result.alternateTitle)
+        contributeEditSongTitle.val(result.title)
         contributeEditSongOrdinal.val(result.ordinal)
+        contributeEditSongAnimeTitle.val(result.animeTitle)
+        contributeEditSongArtistName.val(result.artistName)
         contributeEditSongOpening.prop("checked", result.opening)
         contributeEditSongEnding.prop("checked", !result.opening)
     }
     else if (method == "editAnime")
     {
         contributeEditAnime.toggleClass("hidden", false)
-        contributeEditAnimeDisplayTitle.val(result.displayTitle)
-        contributeEditAnimeAlternateTitle.val(result.alternateTitle)
+        contributeEditAnimeTitle.val(result.animeTitle)
     }
     else if (method == "editArtist")
     {
         contributeEditArtist.toggleClass("hidden", false)
-        contributeEditArtistDisplayTitle.val(result.displayTitle)
-        contributeEditArtistAlternateTitle.val(result.alternateTitle)
+        contributeEditArtistName.val(result.artistName)
     }
+    contributeSearch.attr("data-focus", "false")
+    return false
 }
 
 function submitSuccess()
@@ -160,10 +169,9 @@ function submitError(_, textStatus, errorThrown)
 function contributeAddSong_onSubmit(event)
 {
     event.preventDefault()
-    const displayTitle = contributeAddSongDisplayTitle.val()
-    const alternateTitle = contributeAddSongAlternateTitle.val()
+    const title = contributeAddSongTitle.val()
     const animeTitle = contributeAddSongAnimeTitle.val()
-    const artistTitle = contributeAddSongArtistTitle.val()
+    const artistName = contributeAddSongArtistName.val()
     const ordinal = contributeAddSongOrdinal.val()
     const opening = contributeAddSongOpening.prop("checked")
     const request =
@@ -173,12 +181,79 @@ function contributeAddSong_onSubmit(event)
         dataType: "text",
         data:
         {
-            displayTitle: displayTitle,
-            alternateTitle: alternateTitle,
+            title: title,
             animeTitle: animeTitle,
-            artistTitle: artistTitle,
+            artistName: artistName,
             ordinal: ordinal,
             opening: opening
+        },
+        success: submitSuccess,
+        error: submitError
+    }
+    $.ajax(request)
+    return false
+}
+
+function contributeEditSong_onSubmit(event)
+{
+    event.preventDefault()
+    const title = contributeEditSongTitle.val()
+    const animeTitle = contributeEditSongAnimeTitle.val()
+    const artistName = contributeEditSongArtistName.val()
+    const ordinal = contributeEditSongOrdinal.val()
+    const opening = contributeEditSongOpening.prop("checked")
+    const request =
+    {
+        url: `${location.origin}/api/edit-song`,
+        method: "POST",
+        dataType: "text",
+        data:
+        {
+            title: title,
+            animeTitle: animeTitle,
+            artistName: artistName,
+            ordinal: ordinal,
+            opening: opening
+        },
+        success: submitSuccess,
+        error: submitError
+    }
+    $.ajax(request)
+    return false
+}
+
+function contributeEditAnime_onSubmit(event)
+{
+    event.preventDefault()
+    const title = contributeEditAnimeTitle.val()
+    const request =
+    {
+        url: `${location.origin}/api/edit-anime`,
+        method: "POST",
+        dataType: "text",
+        data:
+        {
+            title: title
+        },
+        success: submitSuccess,
+        error: submitError
+    }
+    $.ajax(request)
+    return false
+}
+
+function contributeEditArtist_onSubmit(event)
+{
+    event.preventDefault()
+    const name = contributeEditArtistName.val()
+    const request =
+    {
+        url: `${location.origin}/api/edit-artist`,
+        method: "POST",
+        dataType: "text",
+        data:
+        {
+            name: name
         },
         success: submitSuccess,
         error: submitError
@@ -195,3 +270,8 @@ contributeMethod.on("change", contributeMethod_onChange)
 contributeQuery.on("input", contributeQuery_onInput)
 contributeSearchBox.on("click", "button", contributeSearchBox_onClick)
 contributeAddSong.on("submit", contributeAddSong_onSubmit)
+contributeEditSong.on("submit", contributeEditSong_onSubmit)
+contributeEditAnime.on("submit", contributeEditAnime_onSubmit)
+contributeEditArtist.on("submit", contributeEditArtist_onSubmit)
+
+init()

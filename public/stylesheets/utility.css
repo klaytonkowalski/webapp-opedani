@@ -1,3 +1,7 @@
+/*******************************************************************************
+/* COLORS
+*******************************************************************************/
+
 .background-dark
 {
     background-color: #202020;
@@ -5,7 +9,7 @@
 
 .shadow
 {
-    box-shadow: 0 0 5px #101010;
+    box-shadow: 0 0 10px #101010;
 }
 
 .color-primary
@@ -26,6 +30,15 @@
 .color-subtle
 {
     color: #797979;
+}
+
+/*******************************************************************************
+/* FORMATS
+*******************************************************************************/
+
+.hidden
+{
+    display: none !important;
 }
 
 .padding-small
@@ -124,7 +137,7 @@
     grid-column: 1 / -1;
 }
 
-.fluid-small, .fluid-medium, .fluid.large
+.fluid-small, .fluid-medium, .fluid-large
 {
     grid-template-columns: 1fr;
 }
@@ -152,6 +165,10 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
+
+/*******************************************************************************
+/* BREAKPOINTS
+*******************************************************************************/
 
 @media screen and (max-width: 319px)
 {
@@ -217,17 +234,16 @@
     }
 }
 
+/*******************************************************************************
+/* AUTHENTICATION
+*******************************************************************************/
+
 [data-auth="true"], [data-auth="false"]
 {
     display: none;
 }
 
 [data-focus="false"] > [data-focus-target]
-{
-    display: none;
-}
-
-.hidden
 {
     display: none;
 }

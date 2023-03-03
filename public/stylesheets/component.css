@@ -1,22 +1,6 @@
-.nav-top
-{
-    align-items: center;
-    background-color: #202020;
-    display: flex;
-    gap: 20px;
-    padding: 10px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
-
-.nav-top-search
-{
-    margin: auto;
-    max-width: 400px;
-    position: relative;
-    width: 100%;
-}
+/*******************************************************************************
+/* GENERAL
+*******************************************************************************/
 
 .icon-image
 {
@@ -38,7 +22,7 @@
 .search-box
 {
     background-color: #202020;
-    box-shadow: 0 0 5px #101010;
+    box-shadow: 0 0 10px #101010;
     display: flex;
     flex-direction: column;
     max-height: 50vh;
@@ -56,7 +40,7 @@
 .dropdown-box
 {
     background-color: #202020;
-    box-shadow: 0 0 5px #101010;
+    box-shadow: 0 0 10px #101010;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -70,6 +54,7 @@
 .status-box
 {
     background-color: #397fa8;
+    box-shadow: 0 0 10px #101010;
     color: #dfdfdf;
     bottom: 0;
     display: flex;
@@ -98,4 +83,41 @@
     cursor: pointer;
     height: 16px;
     width: 16px;
+}
+
+/*******************************************************************************
+/* NAVIGATION
+*******************************************************************************/
+
+.nav-top
+{
+    align-items: center;
+    background-color: #202020;
+    display: flex;
+    gap: 20px;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.nav-top-search
+{
+    margin: auto;
+    max-width: 400px;
+    position: relative;
+    width: 100%;
+}
+
+/*******************************************************************************
+/* PROFILE
+*******************************************************************************/
+
+.profile-avatar
+{
+    background-repeat: no-repeat;
+    background-size: 256px 256px;
+    box-shadow: 0 0 10px #101010;
+    height: 256px;
+    width: 256px;
 }
